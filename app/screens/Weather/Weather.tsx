@@ -73,11 +73,13 @@ const Weather = () => {
             setShowSearchBar={setShowSearchBar}
           />
         )}
-        <View style={[styles.weatherDataContainer, { marginBottom: bottom }]}>
-          <WeatherData current={current} location={location} />
-          <WeatherMetadata current={current} />
-          <WeatherDaysCarousel forecastday={weather?.forecast?.forecastday} />
-        </View>
+        {current && location && weather && (
+          <View style={[styles.weatherDataContainer, { marginBottom: bottom }]}>
+            <WeatherData current={current} location={location} />
+            <WeatherMetadata current={current} />
+            <WeatherDaysCarousel forecastday={weather.forecast.forecastday} />
+          </View>
+        )}
       </View>
       <WeatherDropdown
         locations={locations}

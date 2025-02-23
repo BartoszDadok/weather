@@ -5,23 +5,25 @@ import { styles } from "./WeatherMetadata.styles";
 import { theme } from "@/app/theme";
 
 type WeatherMetadataProps = {
-  current?: Current;
+  current: Current;
 };
-const WeatherMetadata = ({ current }: WeatherMetadataProps) => {
-  const lastUpdated = new Date(current?.last_updated || "").toLocaleTimeString(
-    [],
-    { hour: "2-digit", minute: "2-digit" }
-  );
+const WeatherMetadata = ({
+  current: { last_updated, wind_kph, humidity },
+}: WeatherMetadataProps) => {
+  const lastUpdated = new Date(last_updated || "").toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.item}>
           <Feather name="wind" size={30} color={theme.pallette.text[700]} />
-          <Text style={styles.itemText}>{current?.wind_kph} km/h</Text>
+          <Text style={styles.itemText}>{wind_kph} km/h</Text>
         </View>
         <View style={styles.item}>
           <Entypo name="drop" size={30} color={theme.pallette.text[700]} />
-          <Text style={styles.itemText}>{current?.humidity}%</Text>
+          <Text style={styles.itemText}>{humidity}%</Text>
         </View>
         <View style={styles.item}>
           <Feather name="sun" size={30} color={theme.pallette.text[700]} />

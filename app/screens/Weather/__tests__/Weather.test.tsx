@@ -9,6 +9,28 @@ import { Weather } from "../Weather";
 import Toast from "react-native-toast-message";
 import { WeatherDaysCarousel } from "../WeatherDaysCarousel";
 
+const mockWeatherData = {
+  current: {
+    temp_c: 20,
+    condition: { text: "Sunny" },
+    wind_kph: 10,
+    humidity: 50,
+    last_updated: new Date().toISOString(),
+  },
+  location: { name: "Lisbon", country: "Portugal" },
+  forecast: {
+    forecastday: [
+      {
+        date: new Date().toISOString(),
+        day: {
+          avgtemp_c: 22,
+          condition: { text: "Partly cloudy" },
+        },
+      },
+    ],
+  },
+};
+
 jest.mock("@expo/vector-icons", () => ({
   AntDesign: jest.fn(),
   Entypo: jest.fn(),
@@ -44,28 +66,6 @@ describe("Weather Component", () => {
   });
 
   it("renders weather data after loading", async () => {
-    const mockWeatherData = {
-      current: {
-        temp_c: 20,
-        condition: { text: "Sunny" },
-        wind_kph: 10,
-        humidity: 50,
-        last_updated: new Date().toISOString(),
-      },
-      location: { name: "Lisbon", country: "Portugal" },
-      forecast: {
-        forecastday: [
-          {
-            date: new Date().toISOString(),
-            day: {
-              avgtemp_c: 22,
-              condition: { text: "Partly cloudy" },
-            },
-          },
-        ],
-      },
-    };
-
     mockUseWeather.mockReturnValue({
       data: mockWeatherData,
       isLoading: false,
@@ -128,28 +128,6 @@ describe("Weather Component", () => {
   });
 
   it("renders WeatherDaysCarousel with forecast data", async () => {
-    const mockWeatherData = {
-      current: {
-        temp_c: 20,
-        condition: { text: "Sunny" },
-        wind_kph: 10,
-        humidity: 50,
-        last_updated: new Date().toISOString(),
-      },
-      location: { name: "Lisbon", country: "Portugal" },
-      forecast: {
-        forecastday: [
-          {
-            date: new Date().toISOString(),
-            day: {
-              avgtemp_c: 22,
-              condition: { text: "Partly cloudy" },
-            },
-          },
-        ],
-      },
-    };
-
     mockUseWeather.mockReturnValue({
       data: mockWeatherData,
       isLoading: false,
@@ -164,17 +142,6 @@ describe("Weather Component", () => {
   });
 
   it("renders WeatherMetadata with current weather data", async () => {
-    const mockWeatherData = {
-      current: {
-        temp_c: 20,
-        condition: { text: "Sunny" },
-        wind_kph: 10,
-        humidity: 50,
-        last_updated: new Date().toISOString(),
-      },
-      location: { name: "Lisbon", country: "Portugal" },
-    };
-
     mockUseWeather.mockReturnValue({
       data: mockWeatherData,
       isLoading: false,
@@ -213,17 +180,6 @@ describe("Weather Component", () => {
   });
 
   it("renders WeatherData with location and current weather data", async () => {
-    const mockWeatherData = {
-      current: {
-        temp_c: 20,
-        condition: { text: "Sunny" },
-        wind_kph: 10,
-        humidity: 50,
-        last_updated: new Date().toISOString(),
-      },
-      location: { name: "Lisbon", country: "Portugal" },
-    };
-
     mockUseWeather.mockReturnValue({
       data: mockWeatherData,
       isLoading: false,
