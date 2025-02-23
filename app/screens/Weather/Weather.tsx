@@ -15,7 +15,7 @@ import { WeatherMetadata } from "./WeatherMetadata";
 import { WeatherData } from "./WeatherData";
 import Toast from "react-native-toast-message";
 
-const imagePath = require("../../../assets/icons/mountain.jpg");
+const imagePath = require("../../assets/icons/mountain.jpg");
 
 const DEFAULT_LOCATION = "Lisbon";
 const DEFAULT_DAYS = 7;
@@ -62,31 +62,33 @@ const Weather = () => {
     <View style={styles.screenContainer}>
       <Image style={styles.image} blurRadius={25} source={imagePath} />
       <View style={styles.contentContainer}>
-        {isLoading && !weather ? (
+        {isLoading || !weather ? (
           <Loading testID="loading" />
         ) : (
-          <WeatherSearchBar
-            showSearchBar={showSearchBar}
-            handleSearch={handleSearch}
-            setShowSearchBar={setShowSearchBar}
-          />
-        )}
-        {weather && (
-          <View style={[styles.weatherDataContainer, { marginBottom: bottom }]}>
-            <WeatherData
-              current={weather.current}
-              location={weather.location}
+          <>
+            <WeatherSearchBar
+              showSearchBar={showSearchBar}
+              handleSearch={handleSearch}
+              setShowSearchBar={setShowSearchBar}
             />
-            <WeatherMetadata current={weather.current} />
-            <WeatherDaysCarousel forecastday={weather.forecast.forecastday} />
-          </View>
+            <View
+              style={[styles.weatherDataContainer, { marginBottom: bottom }]}
+            >
+              <WeatherData
+                current={weather.current}
+                location={weather.location}
+              />
+              <WeatherMetadata current={weather.current} />
+              <WeatherDaysCarousel forecastday={weather.forecast.forecastday} />
+            </View>
+          </>
         )}
+        <WeatherDropdown
+          locations={locations}
+          showSearchBar={showSearchBar}
+          handleLocation={handleLocation}
+        />
       </View>
-      <WeatherDropdown
-        locations={locations}
-        showSearchBar={showSearchBar}
-        handleLocation={handleLocation}
-      />
     </View>
   );
 };
