@@ -52,8 +52,6 @@ const Weather = () => {
     setShowSearchBar(false);
   };
 
-  const { current, location } = weather || {};
-
   useEffect(() => {
     if (error) {
       Toast.show(errorToastOptions);
@@ -73,10 +71,13 @@ const Weather = () => {
             setShowSearchBar={setShowSearchBar}
           />
         )}
-        {current && location && weather && (
+        {weather && (
           <View style={[styles.weatherDataContainer, { marginBottom: bottom }]}>
-            <WeatherData current={current} location={location} />
-            <WeatherMetadata current={current} />
+            <WeatherData
+              current={weather.current}
+              location={weather.location}
+            />
+            <WeatherMetadata current={weather.current} />
             <WeatherDaysCarousel forecastday={weather.forecast.forecastday} />
           </View>
         )}
