@@ -85,7 +85,7 @@ describe("Weather Component", () => {
   it("handles search and shows locations", async () => {
     const mockLocations = [{ name: "Lisbon", country: "Portugal" }];
     mockUseWeather.mockReturnValue({
-      data: null,
+      data: mockWeatherData,
       isLoading: false,
       error: null,
     });
@@ -107,7 +107,7 @@ describe("Weather Component", () => {
 
   it("shows error toast on search failure", async () => {
     mockUseWeather.mockReturnValue({
-      data: null,
+      data: mockWeatherData,
       isLoading: false,
       error: null,
     });
@@ -158,7 +158,7 @@ describe("Weather Component", () => {
   it("renders WeatherDropdown with location suggestions", async () => {
     const mockLocations = [{ name: "Lisbon", country: "Portugal" }];
     mockUseWeather.mockReturnValue({
-      data: null,
+      data: mockWeatherData,
       isLoading: false,
       error: null,
     });
